@@ -46,14 +46,17 @@ public class PopulationReport {
                 if (region[i].length() > 16) {
                     region[i] = region[i].substring(0, 16);
                 }
-                System.out.println(name[i]+ " "+population[i]+" "+lifeExpectancy[i]+" "+continent[i]);
             }
-
         }
         inFile.close();
+
+        System.out.println("POPULATION REPORT");
+
+        doTable1(code,name,region,lifeExpectancy);
     }
 
-    static void doTable1() {
+    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy) {
+
 
     }
 
