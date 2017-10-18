@@ -31,9 +31,7 @@ public class PopulationReport {
         for (int i = 0; i < 239; i++) {
             line = inFile.nextLine();
             fields = line.split(",");
-            if (fields[5].equals("0") || fields[6].equals("0") || fields[2].equals("'Antarctica'")) {
-            }
-            else {
+            if (!fields[5].equals("0") && !fields[6].equals("0") && !fields[2].equals("'Antarctica'")) {
                 code[i] = fields[0].substring(29, 32);
                 continent[i] = fields[2].substring(1, fields[2].length() - 1);
                 landArea[i] = Integer.parseInt(fields[4]);
