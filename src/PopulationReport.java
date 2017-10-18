@@ -8,33 +8,38 @@ import java.util.Scanner;
 
 public class PopulationReport {
     public static void main(String[] args) throws IOException {
-        String[] code;
-        String[] name;
-        String[] continent;
-        String[] region;
-        long[] landArea;
-        long[] population;
-        int[] lifeExpectancy;
-        String[] shortCode;
+        String[] code = new String[239];
+        String[] name = new String[239];
+        String[] continent = new String[239];
+        String[] region = new String[239];
+        int[] landArea = new int[239];
+        int[] population = new int[239];
+        double[] lifeExpectancy = new double[239];
+        String[] shortCode = new String[239];
 
-        String codeRaw;
-        String nameRaw;
-        String continentRaw;
-        String regionRaw;
-        long landAreaRaw;
-        long populationRaw;
-        int lifeExpectancyRaw;
-        String shortCodeRaw;
-        String[] fields= new String[8];
+        String[] fields;
         String line;
+        String trash;
 
         File input = new File("CountryData8Col3Hdr.csv");
         Scanner inFile = new Scanner(input);
 
-        for (int i=0;i<241;i++){
-            line=inFile.nextLine();
-            fields=line.split(",");
+        //Skips first 3 lines of file
+        for (int i = 0; i < 3; i++) {
+            trash = inFile.nextLine();
+        }
 
+        for (int i = 0; i < 239; i++) {
+            line = inFile.nextLine();
+            fields = line.split(",");
+            code[i] = fields[0].substring(29, 32);
+            name[i] = fields[1].substring(1, fields[1].length() - 1);
+            continent[i] = fields[2].substring(1, fields[2].length() - 1);
+            region[i] = fields[3].substring(1, fields[3].length() - 1);
+            landArea[i] = Integer.parseInt(fields[4]);
+            population[i] = Integer.parseInt(fields[5]);
+            lifeExpectancy[i] = Double.parseDouble(fields[6]);
+            shortCode[i] = fields[7].substring(1, 3);
         }
 
         inFile.close();
