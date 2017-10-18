@@ -25,10 +25,19 @@ public class PopulationReport {
         long populationRaw;
         int lifeExpectancyRaw;
         String shortCodeRaw;
+        String[] fields= new String[8];
+        String line;
 
         File input = new File("CountryData8Col3Hdr.csv");
         Scanner inFile = new Scanner(input);
 
+        for (int i=0;i<241;i++){
+            line=inFile.nextLine();
+            fields=line.split(",");
+
+        }
+
+        inFile.close();
     }
 
     static void doTable1() {
