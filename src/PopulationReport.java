@@ -33,13 +33,21 @@ public class PopulationReport {
             line = inFile.nextLine();
             fields = line.split(",");
             code[i] = fields[0].substring(29, 32);
-            name[i] = fields[1].substring(1, fields[1].length() - 1);
             continent[i] = fields[2].substring(1, fields[2].length() - 1);
-            region[i] = fields[3].substring(1, fields[3].length() - 1);
             landArea[i] = Integer.parseInt(fields[4]);
             population[i] = Integer.parseInt(fields[5]);
             lifeExpectancy[i] = Double.parseDouble(fields[6]);
             shortCode[i] = fields[7].substring(1, 3);
+
+            name[i] = fields[1].substring(1, fields[1].length()-1);
+            if (name[i].length()>16) {
+                name[i] = name[i].substring(0, 16);
+            }
+            region[i] = fields[3].substring(1, fields[3].length()-1);
+            if (region[i].length()>16) {
+                region[i] = region[i].substring(0, 16);
+            }
+            System.out.println(region[i]);
         }
 
         inFile.close();
