@@ -52,10 +52,16 @@ public class PopulationReport {
 
         System.out.println("POPULATION REPORT");
 
-        doTable1(code,name,region,lifeExpectancy);
+        doTable1(code,name,region,lifeExpectancy, continent);
     }
 
-    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy) {
+    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy, String[] continent) {
+        System.out.println("Table 1: Life Expectancy in Africa by Country");
+        System.out.println("Code    Name    Region");
+        for (int i=0;i<code.length;i++){
+            System.out.println(code[i]+ " "+name[i]+" "+region[i]+ " "+lifeExpectancy[i]);
+        }
+
 
 
     }
