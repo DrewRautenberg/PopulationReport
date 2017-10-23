@@ -46,14 +46,23 @@ public class PopulationReport {
                 if (region[i].length() > 16) {
                     region[i] = region[i].substring(0, 16);
                 }
-                System.out.println(name[i]+ " "+population[i]+" "+lifeExpectancy[i]+" "+continent[i]);
             }
-
         }
         inFile.close();
+
+        System.out.println("POPULATION REPORT");
+
+        doTable1(code,name,region,lifeExpectancy, continent);
     }
 
-    static void doTable1() {
+    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy, String[] continent) {
+        System.out.println("Table 1: Life Expectancy in Africa by Country");
+        System.out.println("Code    Name    Region");
+        for (int i=0;i<code.length;i++){
+            System.out.println(code[i]+ " "+name[i]+" "+region[i]+ " "+lifeExpectancy[i]);
+        }
+
+
 
     }
 
