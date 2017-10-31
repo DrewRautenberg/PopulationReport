@@ -74,10 +74,12 @@ public class PopulationReport {
         }
         inFile.close();
 
-        System.out.println("POPULATION REPORT");
+        //System.out.println(getSpacer(20)+"POPULATION REPORT");
+        System.out.printf("%-20s","POPULATION REPORT");
 
         doTable1(code, name, region, lifeExpectancy, continent);
         doTable2(code, name, continent, population, landArea);
+        doTable3(continent,lifeExpectancy);
     }
 
     static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
@@ -106,7 +108,7 @@ public class PopulationReport {
         int landMaxIndex = -1;
         int landMinIndex = -1;
         int landTotal = 0;
-        int landAvg = 0;
+        int landAvg;
 
         for (int i = 0; i < name.length; i++) {
             if (cont[i].equals("Europe")) {
@@ -153,7 +155,127 @@ public class PopulationReport {
 
     }
 
-    static void doTable3() {
+    static void doTable3(String[] cont, double[] lifeExp) {
+        double africaMax = Double.MIN_VALUE;
+        double africaMin = Double.MAX_VALUE;
+        double africaTot = 0;
+        double africaAvg=0;
+        int africaCt=0;
+
+        double asiaMax = Double.MIN_VALUE;
+        double asiaMin = Double.MAX_VALUE;
+        double asiaTot=0;
+        double asiaAvg=0;
+        int asiaCt=0;
+
+        double europeMax = Double.MIN_VALUE;
+        double europeMin = Double.MAX_VALUE;
+        double europeTot=0;
+        double europeAvg=0;
+        int europeCt=0;
+
+        double naMax = Double.MIN_VALUE;
+        double naMin = Double.MAX_VALUE;
+        double naTot=0;
+        double naAvg=0;
+        int naCt=0;
+
+        double ocMax = Double.MIN_VALUE;
+        double ocMin = Double.MAX_VALUE;
+        double ocTot=0;
+        double ocAvg=0;
+        int ocCt=0;
+
+        double saMax = Double.MIN_VALUE;
+        double saMin = Double.MAX_VALUE;
+        double saTot=0;
+        double saAvg=0;
+        int saCt=0;
+
+        for (int i=0;i<cont.length;i++){
+            switch (cont[i]){
+                case "Africa":
+                    if (lifeExp[i] > africaMax) {
+                        africaMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < africaMin) {
+                        africaMin = lifeExp[i];
+                    }
+                    africaTot+=lifeExp[i];
+                    africaCt++;
+                    break;
+                case "Asia":
+                    if (lifeExp[i] > asiaMax) {
+                        asiaMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < asiaMin) {
+                        asiaMin = lifeExp[i];
+                    }
+                    asiaTot+=lifeExp[i];
+                    asiaCt++;
+                    break;
+                case "Europe":
+                    if (lifeExp[i] > europeMax) {
+                        europeMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < europeMin) {
+                        europeMin = lifeExp[i];
+                    }
+                    europeTot+=lifeExp[i];
+                    europeCt++;
+                    break;
+                case "North America":
+                    if (lifeExp[i] > naMax) {
+                        naMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < naMin) {
+                        naMin = lifeExp[i];
+                    }
+                    naTot+=lifeExp[i];
+                    naCt++;
+                    break;
+                case "Oceania":
+                    if (lifeExp[i] > ocMax) {
+                        ocMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < ocMin) {
+                        ocMin = lifeExp[i];
+                    }
+                    ocTot+=lifeExp[i];
+                    ocCt++;
+                    break;
+                case "South America":
+                    if (lifeExp[i] > saMax) {
+                        saMax = lifeExp[i];
+                    }
+                    if (lifeExp[i] < saMin) {
+                        saMin = lifeExp[i];
+                    }
+                    saTot+=lifeExp[i];
+                    saCt++;
+                    break;
+            }
+        }
+
+        africaAvg=africaTot/africaCt;
+        asiaAvg=asiaTot/asiaCt;
+        europeAvg=europeTot/europeCt;
+        naAvg=naTot/naCt;
+        ocAvg=ocTot/ocCt;
+        saAvg=saTot/saCt;
+
+        System.out.println("\n\n");
+        System.out.println("TABLE 3:  Life Expectancy by Continent");
+        System.out.printf("\n\t%-14s %-7s %-6s %s", "Continent", "Highest","Lowest","Average");
+        System.out.println("\n\t-------------- ------- ------ -------");
+        System.out.printf("\t%-15s %-7s %-6s %.1f", "Africa", africaMax,africaMin,africaAvg);
+        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Asia", asiaMax,asiaMin,asiaAvg);
+        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Europe", europeMax,europeMin,europeAvg);
+        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "North America", naMax,naMin,naAvg);
+        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Oceania", ocMax,ocMin,ocAvg);
+        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "South America", saMax,saMin,saAvg);
+
+
 
     }
 }
