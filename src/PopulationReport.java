@@ -77,22 +77,25 @@ public class PopulationReport {
         System.out.println("POPULATION REPORT");
 
         doTable1(code, name, region, lifeExpectancy, continent);
+        //doTable2(code, name, region, lifeExpectancy, continent);
     }
 
     static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
         System.out.println("Table 1: Life Expectancy in Africa by Country");
-        System.out.println("Code    Name    Region");
+        System.out.printf("\n%-5s %-17s %-17s %2s\n","Code","Name","Region","LifeExp");
+        System.out.print("----  ----------------- ----------------- -------");
         for (int i = 0; i < name.length; i++) {
             if (cont[i].equals("Africa")) {
-                System.out.println(code[i] + " " + name[i] + " " + region[i] + " " + lifeExpectancy[i]);
+                System.out.printf("\n%-5s %-17s %-18s %2s", code[i], name[i], region[i], lifeExpectancy[i]);
+                //System.out.println(code[i] + "  " + name[i] + " " + region[i] + " " + lifeExpectancy[i]);
             }
         }
 
 
     }
 
-    static void doTable2() {
-
+    static void doTable2(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
+        System.out.println("Table 2:  Europe Population & Size");
     }
 
     static void doTable3() {
