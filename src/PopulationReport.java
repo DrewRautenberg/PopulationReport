@@ -1,6 +1,6 @@
 // Author: Drew Rautenberg
 // Class section: CS1110-560, Wednesday 2:30 to 4:20
-// Program: Assignment 4, Population Report
+// Program: Assignment 4, Population Report app
 
 import java.io.File;
 import java.io.IOException;
