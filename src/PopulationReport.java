@@ -4,6 +4,7 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class PopulationReport {
@@ -33,6 +34,8 @@ public class PopulationReport {
 
         File input = new File("CountryData8Col3Hdr.csv");
         Scanner inFile = new Scanner(input);
+
+        PrintWriter outFile = new PrintWriter("PopulationReport.txt");
 
         //Skips first 3 lines of file
         for (int i = 0; i < 3; i++) {
@@ -74,29 +77,33 @@ public class PopulationReport {
         }
         inFile.close();
 
-        //System.out.println(getSpacer(20)+"POPULATION REPORT");
-        System.out.printf("%15s%s\n\n", " ", "POPULATION REPORT");
+        outFile.printf("%15s%s\n\n", " ", "POPULATION REPORT");
 
+        doTable1(code, name, region, lifeExpectancy, continent, outFile);
+        doTable2(code, name, continent, population, landArea, outFile);
+        doTable3(continent, lifeExpectancy, outFile);
 
-        doTable1(code, name, region, lifeExpectancy, continent);
-        doTable2(code, name, continent, population, landArea);
-        doTable3(continent, lifeExpectancy);
+        outFile.printf("\n\n%15s%s", " ", "<< END OF REPORT >>");
+
+        outFile.close();
     }
 
-    static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
-        System.out.println("\nTable 1: Life Expectancy in Africa by Country");
-        System.out.printf("\n%-5s %-17s %-17s %2s\n", "Code", "Name", "Region", "LifeExp");
-        System.out.print("----  ----------------- ----------------- -------");
+    private static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy,
+                                 String[] cont, PrintWriter outFile) throws IOException {
+        outFile.println("\nTable 1: Life Expectancy in Africa by Country");
+        outFile.printf("\n%-5s %-17s %-17s %2s\n", "Code", "Name", "Region", "LifeExp");
+        outFile.print("----  ----------------- ----------------- -------");
         for (int i = 0; i < name.length; i++) {
             if (cont[i].equals("Africa")) {
-                System.out.printf("\n%-5s %-17s %-18s %2s", code[i], name[i], region[i], lifeExpectancy[i]);
+                outFile.printf("\n%-5s %-17s %-18s %2s", code[i], name[i], region[i], lifeExpectancy[i]);
             }
         }
 
 
     }
 
-    static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea) {
+    static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea,
+                         PrintWriter outFile) throws IOException {
         int popMax = Integer.MIN_VALUE;
         int popMin = Integer.MAX_VALUE;
         int popMaxIndex = -1;
@@ -136,27 +143,27 @@ public class PopulationReport {
         }
         popAvg = popTotal / count;
         landAvg = landTotal / count;
-        System.out.println("\n\n");
-        System.out.println("Table 2:  Europe Population & Size");
-        System.out.println("\nPopulation:");
-        System.out.printf("\t%-9s %-10s %-16s (%s)",
+        outFile.println("\n\n");
+        outFile.println("Table 2:  Europe Population & Size");
+        outFile.println("\nPopulation:");
+        outFile.printf("\t%-9s %-10s %-16s (%s)",
                 "Largest:", population[popMaxIndex], name[popMaxIndex], code[popMaxIndex]);
-        System.out.printf("\n\t%s %-10s %-16s (%s)",
+        outFile.printf("\n\t%s %-10s %-16s (%s)",
                 "Smallest:", population[popMinIndex], name[popMinIndex], code[popMinIndex]);
-        System.out.printf("\n\t%-9s %-10s", "Average:", popAvg);
-        System.out.printf("\n\t%-9s %-10s", "Total:", popTotal);
+        outFile.printf("\n\t%-9s %-10s", "Average:", popAvg);
+        outFile.printf("\n\t%-9s %-10s", "Total:", popTotal);
 
-        System.out.println("\nLand size (in sq km):");
-        System.out.printf("\t%-9s %-10s %-16s (%s)",
+        outFile.println("\nLand size (in sq km):");
+        outFile.printf("\t%-9s %-10s %-16s (%s)",
                 "Largest:", landArea[landMaxIndex], name[landMaxIndex], code[landMaxIndex]);
-        System.out.printf("\n\t%s %-10s %-16s (%s)",
+        outFile.printf("\n\t%s %-10s %-16s (%s)",
                 "Smallest:", landArea[landMinIndex], name[landMinIndex], code[landMinIndex]);
-        System.out.printf("\n\t%-9s %-10s", "Average:", landAvg);
-        System.out.printf("\n\t%-9s %-10s", "Total:", landTotal);
+        outFile.printf("\n\t%-9s %-10s", "Average:", landAvg);
+        outFile.printf("\n\t%-9s %-10s", "Total:", landTotal);
 
     }
 
-    static void doTable3(String[] cont, double[] lifeExp) {
+    static void doTable3(String[] cont, double[] lifeExp, PrintWriter outFile) throws IOException {
         double africaMax = Double.MIN_VALUE;
         double africaMin = Double.MAX_VALUE;
         double africaTot = 0;
@@ -265,16 +272,16 @@ public class PopulationReport {
         ocAvg = ocTot / ocCt;
         saAvg = saTot / saCt;
 
-        System.out.println("\n\n");
-        System.out.println("TABLE 3:  Life Expectancy by Continent");
-        System.out.printf("\n\t%-14s %-7s %-6s %s", "Continent", "Highest", "Lowest", "Average");
-        System.out.println("\n\t-------------- ------- ------ -------");
-        System.out.printf("\t%-15s %-7s %-6s %.1f", "Africa", africaMax, africaMin, africaAvg);
-        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Asia", asiaMax, asiaMin, asiaAvg);
-        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Europe", europeMax, europeMin, europeAvg);
-        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "North America", naMax, naMin, naAvg);
-        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "Oceania", ocMax, ocMin, ocAvg);
-        System.out.printf("\n\t%-15s %-7s %-6s %.1f", "South America", saMax, saMin, saAvg);
+        outFile.println("\n\n");
+        outFile.println("TABLE 3:  Life Expectancy by Continent");
+        outFile.printf("\n\t%-14s %-7s %-6s %s", "Continent", "Highest", "Lowest", "Average");
+        outFile.println("\n\t-------------- ------- ------ -------");
+        outFile.printf("\t%-15s %-7s %-6s %.1f", "Africa", africaMax, africaMin, africaAvg);
+        outFile.printf("\n\t%-15s %-7s %-6s %.1f", "Asia", asiaMax, asiaMin, asiaAvg);
+        outFile.printf("\n\t%-15s %-7s %-6s %.1f", "Europe", europeMax, europeMin, europeAvg);
+        outFile.printf("\n\t%-15s %-7s %-6s %.1f", "North America", naMax, naMin, naAvg);
+        outFile.printf("\n\t%-15s %-7s %-6s %.1f", "Oceania", ocMax, ocMin, ocAvg);
+        outFile.printf("\n\t%-15s %-7s %-6s %.1f", "South America", saMax, saMin, saAvg);
 
 
     }
