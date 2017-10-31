@@ -85,6 +85,8 @@ public class PopulationReport {
         outFile.printf("\n\n\n%15s%s", " ", "<< END OF REPORT >>");
 
         outFile.close();
+
+        System.out.println("FILE CREATED:  PopulationReport.txt in top-level folder of this project");
     }
 
     private static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy,
