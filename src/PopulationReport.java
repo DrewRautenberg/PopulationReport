@@ -97,8 +97,6 @@ public class PopulationReport {
                 outFile.printf("\n%-5s %-17s %-18s %2s", code[i], name[i], region[i], lifeExpectancy[i]);
             }
         }
-
-
     }
 
     private static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea,
@@ -159,7 +157,6 @@ public class PopulationReport {
                 "Smallest:", landArea[landMinIndex], name[landMinIndex], code[landMinIndex]);
         outFile.printf("\n\t%-9s %-10s", "Average:", landAvg);
         outFile.printf("\n\t%-9s %-10s", "Total:", landTotal);
-
     }
 
     private static void doTable3(String[] cont, double[] lifeExp, PrintWriter outFile) throws IOException {
