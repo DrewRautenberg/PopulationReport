@@ -82,7 +82,7 @@ public class PopulationReport {
         doTable2(code, name, continent, population, landArea, outFile);
         doTable3(continent, lifeExpectancy, outFile);
 
-        outFile.printf("\n\n%15s%s", " ", "<< END OF REPORT >>");
+        outFile.printf("\n\n\n%15s%s", " ", "<< END OF REPORT >>");
 
         outFile.close();
     }
