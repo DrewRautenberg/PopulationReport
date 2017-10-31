@@ -16,6 +16,16 @@ public class PopulationReport {
         int[] population = new int[239];
         double[] lifeExpectancy = new double[239];
 
+        //variables for storing
+        String codeIn;
+        String nameIn;
+        String continentIn;
+        String regionIn;
+        int landAreaIn;
+        int populationIn;
+        double lifeExpIn;
+
+
         String[] fields;
         String line;
         String trash;
@@ -31,20 +41,32 @@ public class PopulationReport {
         for (int i = 0; i < 239; i++) {
             line = inFile.nextLine();
             fields = line.split(",");
-            if (!fields[5].equals("0") && !fields[6].equals("0") && !fields[2].equals("'Antarctica'")) {
-                code[i] = fields[0].substring(29, 32);
-                continent[i] = fields[2].substring(1, fields[2].length() - 1);
-                landArea[i] = Integer.parseInt(fields[4]);
-                population[i] = Integer.parseInt(fields[5]);
-                lifeExpectancy[i] = Double.parseDouble(fields[6]);
 
-                name[i] = fields[1].substring(1, fields[1].length() - 1);
-                if (name[i].length() > 16) {
-                    name[i] = name[i].substring(0, 16);
+            codeIn= fields[0].substring(29, 32);
+            nameIn=fields[1].substring(1,fields[1].length()-1);
+            continentIn = fields[2].substring(1, fields[2].length() - 1);
+            regionIn = fields[3].substring(1, fields[3].length() - 1);
+            landAreaIn = Integer.parseInt(fields[4]);
+            populationIn = Integer.parseInt(fields[5]);
+            lifeExpIn = Double.parseDouble(fields[6]);
+
+            if (populationIn != 0 && lifeExpIn!=0 && !continentIn.equals("'Antarctica'")) {
+                code[i]=codeIn;
+                continent[i]=continentIn;
+                landArea[i]=landAreaIn;
+                population[i]=populationIn;
+                lifeExpectancy[i]=lifeExpIn;
+                if (nameIn.length() > 16) {
+                    name[i] = nameIn.substring(0, 16);
                 }
-                region[i] = fields[3].substring(1, fields[3].length() - 1);
-                if (region[i].length() > 16) {
-                    region[i] = region[i].substring(0, 16);
+                else {
+                    name[i]=nameIn;
+                }
+                if (regionIn.length() > 16) {
+                    region[i] = regionIn.substring(0, 16);
+                }
+                else {
+                    region[i]=regionIn;
                 }
             }
         }
@@ -55,11 +77,11 @@ public class PopulationReport {
         doTable1(code,name,region,lifeExpectancy, continent);
     }
 
-    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy, String[] continent) {
+    static void doTable1(String[] code,String[] name,String[] region, double[] lifeExpectancy, String[] cont) {
         System.out.println("Table 1: Life Expectancy in Africa by Country");
         System.out.println("Code    Name    Region");
         for (int i=0;i<name.length;i++) {
-            if (continent[i].equals("Africa")) {
+            if (cont[i].equals("Africa")) {
                 System.out.println(code[i] + " " + name[i] + " " + region[i] + " " + lifeExpectancy[i]);
             }
         }
