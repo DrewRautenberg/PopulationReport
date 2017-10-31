@@ -76,18 +76,17 @@ public class PopulationReport {
 
         System.out.println("POPULATION REPORT");
 
-        //doTable1(code, name, region, lifeExpectancy, continent);
+        doTable1(code, name, region, lifeExpectancy, continent);
         doTable2(code, name, continent, population, landArea);
     }
 
     static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
         System.out.println("Table 1: Life Expectancy in Africa by Country");
-        System.out.printf("\n%-5s %-17s %-17s %2s\n","Code","Name","Region","LifeExp");
+        System.out.printf("\n%-5s %-17s %-17s %2s\n", "Code", "Name", "Region", "LifeExp");
         System.out.print("----  ----------------- ----------------- -------");
         for (int i = 0; i < name.length; i++) {
             if (cont[i].equals("Africa")) {
                 System.out.printf("\n%-5s %-17s %-18s %2s", code[i], name[i], region[i], lifeExpectancy[i]);
-                //System.out.println(code[i] + "  " + name[i] + " " + region[i] + " " + lifeExpectancy[i]);
             }
         }
 
@@ -95,39 +94,62 @@ public class PopulationReport {
     }
 
     static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea) {
-        int popMax= Integer.MIN_VALUE;
+        int popMax = Integer.MIN_VALUE;
         int popMin = Integer.MAX_VALUE;
-        int popMaxIndex=-1;
-        int popMinIndex=-1;
-        int popTotal=0;
+        int popMaxIndex = -1;
+        int popMinIndex = -1;
+        int popTotal = 0;
         int popAvg;
-        int count=0;
+        int count = 0;
+        int landMax = Integer.MIN_VALUE;
+        int landMin = Integer.MAX_VALUE;
+        int landMaxIndex = -1;
+        int landMinIndex = -1;
+        int landTotal = 0;
+        int landAvg = 0;
 
         for (int i = 0; i < name.length; i++) {
             if (cont[i].equals("Europe")) {
-                if (population[i]>popMax){
-                    popMax=population[i];
-                    popMaxIndex=i;
-
+                if (population[i] > popMax) {
+                    popMax = population[i];
+                    popMaxIndex = i;
                 }
-                if (population[i]<popMin){
-                    popMin=population[i];
-                    popMinIndex=i;
+                if (population[i] < popMin) {
+                    popMin = population[i];
+                    popMinIndex = i;
                 }
-                popTotal+=population[i];
+                popTotal += population[i];
+                if (landArea[i] > landMax) {
+                    landMax = landArea[i];
+                    landMaxIndex = i;
+                }
+                if (landArea[i] < landMin) {
+                    landMin = landArea[i];
+                    landMinIndex = i;
+                }
+                landTotal += landArea[i];
                 count++;
             }
         }
-        popAvg=popTotal/count;
-
+        popAvg = popTotal / count;
+        landAvg = landTotal / count;
+        System.out.println("\n\n");
         System.out.println("Table 2:  Europe Population & Size");
         System.out.println("\nPopulation:");
         System.out.printf("\t%-9s %-10s %-16s (%s)",
-                "Largest:", population[popMaxIndex],name[popMaxIndex],code[popMaxIndex]);
+                "Largest:", population[popMaxIndex], name[popMaxIndex], code[popMaxIndex]);
         System.out.printf("\n\t%s %-10s %-16s (%s)",
-                "Smallest:", population[popMinIndex],name[popMinIndex],code[popMinIndex]);
-        System.out.printf("\n\t%-9s %-10s","Average:",popAvg);
-        System.out.printf("\n\t%-9s %-10s","Total:",popTotal);
+                "Smallest:", population[popMinIndex], name[popMinIndex], code[popMinIndex]);
+        System.out.printf("\n\t%-9s %-10s", "Average:", popAvg);
+        System.out.printf("\n\t%-9s %-10s", "Total:", popTotal);
+
+        System.out.println("\nLand size (in sq km):");
+        System.out.printf("\t%-9s %-10s %-16s (%s)",
+                "Largest:", landArea[landMaxIndex], name[landMaxIndex], code[landMaxIndex]);
+        System.out.printf("\n\t%s %-10s %-16s (%s)",
+                "Smallest:", landArea[landMinIndex], name[landMinIndex], code[landMinIndex]);
+        System.out.printf("\n\t%-9s %-10s", "Average:", landAvg);
+        System.out.printf("\n\t%-9s %-10s", "Total:", landTotal);
 
     }
 
