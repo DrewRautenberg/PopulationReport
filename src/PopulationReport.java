@@ -76,8 +76,8 @@ public class PopulationReport {
 
         System.out.println("POPULATION REPORT");
 
-        doTable1(code, name, region, lifeExpectancy, continent);
-        //doTable2(code, name, region, lifeExpectancy, continent);
+        //doTable1(code, name, region, lifeExpectancy, continent);
+        doTable2(code, name, continent, population, landArea);
     }
 
     static void doTable1(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
@@ -94,8 +94,41 @@ public class PopulationReport {
 
     }
 
-    static void doTable2(String[] code, String[] name, String[] region, double[] lifeExpectancy, String[] cont) {
+    static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea) {
+        int popMax= Integer.MIN_VALUE;
+        int popMin = Integer.MAX_VALUE;
+        int popMaxIndex=-1;
+        int popMinIndex=-1;
+        int popTotal=0;
+        int popAvg;
+        int count=0;
+
+        for (int i = 0; i < name.length; i++) {
+            if (cont[i].equals("Europe")) {
+                if (population[i]>popMax){
+                    popMax=population[i];
+                    popMaxIndex=i;
+
+                }
+                if (population[i]<popMin){
+                    popMin=population[i];
+                    popMinIndex=i;
+                }
+                popTotal+=population[i];
+                count++;
+            }
+        }
+        popAvg=popTotal/count;
+
         System.out.println("Table 2:  Europe Population & Size");
+        System.out.println("\nPopulation:");
+        System.out.printf("\t%-9s %-10s %-16s (%s)",
+                "Largest:", population[popMaxIndex],name[popMaxIndex],code[popMaxIndex]);
+        System.out.printf("\n\t%s %-10s %-16s (%s)",
+                "Smallest:", population[popMinIndex],name[popMinIndex],code[popMinIndex]);
+        System.out.printf("\n\t%-9s %-10s","Average:",popAvg);
+        System.out.printf("\n\t%-9s %-10s","Total:",popTotal);
+
     }
 
     static void doTable3() {
