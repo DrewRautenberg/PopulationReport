@@ -30,7 +30,6 @@ public class PopulationReport {
 
         String[] fields;
         String line;
-        String trash;
 
         File input = new File("CountryData8Col3Hdr.csv");
         Scanner inFile = new Scanner(input);
@@ -39,7 +38,7 @@ public class PopulationReport {
 
         //Skips first 3 lines of file
         for (int i = 0; i < 3; i++) {
-            trash = inFile.nextLine();
+            inFile.nextLine();
         }
 
         for (int i = 0; i < 239; i++) {
@@ -102,8 +101,8 @@ public class PopulationReport {
 
     }
 
-    static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea,
-                         PrintWriter outFile) throws IOException {
+    private static void doTable2(String[] code, String[] name, String[] cont, int[] population, int[] landArea,
+                                 PrintWriter outFile) throws IOException {
         int popMax = Integer.MIN_VALUE;
         int popMin = Integer.MAX_VALUE;
         int popMaxIndex = -1;
@@ -163,41 +162,41 @@ public class PopulationReport {
 
     }
 
-    static void doTable3(String[] cont, double[] lifeExp, PrintWriter outFile) throws IOException {
+    private static void doTable3(String[] cont, double[] lifeExp, PrintWriter outFile) throws IOException {
         double africaMax = Double.MIN_VALUE;
         double africaMin = Double.MAX_VALUE;
         double africaTot = 0;
-        double africaAvg = 0;
+        double africaAvg;
         int africaCt = 0;
 
         double asiaMax = Double.MIN_VALUE;
         double asiaMin = Double.MAX_VALUE;
         double asiaTot = 0;
-        double asiaAvg = 0;
+        double asiaAvg;
         int asiaCt = 0;
 
         double europeMax = Double.MIN_VALUE;
         double europeMin = Double.MAX_VALUE;
         double europeTot = 0;
-        double europeAvg = 0;
+        double europeAvg;
         int europeCt = 0;
 
         double naMax = Double.MIN_VALUE;
         double naMin = Double.MAX_VALUE;
         double naTot = 0;
-        double naAvg = 0;
+        double naAvg;
         int naCt = 0;
 
         double ocMax = Double.MIN_VALUE;
         double ocMin = Double.MAX_VALUE;
         double ocTot = 0;
-        double ocAvg = 0;
+        double ocAvg;
         int ocCt = 0;
 
         double saMax = Double.MIN_VALUE;
         double saMin = Double.MAX_VALUE;
         double saTot = 0;
-        double saAvg = 0;
+        double saAvg;
         int saCt = 0;
 
         for (int i = 0; i < cont.length; i++) {
@@ -282,7 +281,5 @@ public class PopulationReport {
         outFile.printf("\n\t%-15s %-7s %-6s %.1f", "North America", naMax, naMin, naAvg);
         outFile.printf("\n\t%-15s %-7s %-6s %.1f", "Oceania", ocMax, ocMin, ocAvg);
         outFile.printf("\n\t%-15s %-7s %-6s %.1f", "South America", saMax, saMin, saAvg);
-
-
     }
 }
